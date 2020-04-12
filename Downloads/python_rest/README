@@ -1,0 +1,106 @@
+README
+
+OBJECTIVE:
+
+The objective of this project is to create a Rest API service which will
+- Authenticate user with JWT Tokens
+- Perform CRUD Operations for a User's list of Favorite books.
+- Check for expired token and re-authenticate
+
+
+*****************************************************************************
+
+INSTRUCTIONS TO GET STARTED:
+
+1 Use 'cd venv' to enter venv directory.
+2 Install virtualenv using command- pip install virtualenv.
+3 Run command 'pip install -r req.txt' to install all modules in req.txt
+4 Finally, venv directory conatins a file called 'favbooks.py'. Run the python file using 'python3 favbooks.py'. Once the program starts running, its now time to test the program.
+5 Download Postman or Insomnia to test the Rest API.
+
+***************************************************************************
+
+ INSTRUCTIONS TO TEST THE PROGRAM:
+
+	- To register user:  http://127.0.0.1:5000/register
+		Enter 'name' and 'password' in this format- {"name":<name>,"password":<password>}. Change the method to 'POST' and press Send. 
+		
+		OUTPUT- {
+ 						 "message": "registered successfully"
+						}
+
+
+
+	- For user login:  http://127.0.0.1:5000/login
+                Click on the Authorization tab and select Basic Authentication. Enter the Username and password registered with. Change method to 'GET' and the press send button to generate a random token. This token is whats required to access favorite books.    
+                
+		OUTPUT-
+						{
+  						"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwdWJsaWNfaWQiOiI3NDU0YzFhZi02YTE4LTQzYjItYTk1Zi01Njc4NjFjNmYzZTQiLCJleHAiOjE1ODY1OTk2MDF9.2AllM9ZwIxg7sie0lK9JXS6QG6TfnL7TQztZc7vzK0Q"
+						}
+
+
+	-  To see details of all users who have registered:   http://127.0.0.1:5000/users
+                Change method to 'GET' and the press send button to generate information of all users.                                    
+                
+		OUTPUT-                                      
+                                                {
+ 						 "users": [
+    							{
+      								"name": "Shriya",
+      								"password": "sha256$hp1j8NG0$34c2800d7b1b9834d4c839cfd8aa4e8572c0529184111c0463d94a8a200d934d",
+      								"public_id": "7454c1af-6a18-43b2-a95f-567861c6f3e4"
+    							}
+  							]
+						}
+
+
+	-  To add a favorite book:   http://127.0.0.1:5000/addfav
+		Enter 'title', 'amazon_url','author','genre' of a favorite book in this format- {"title": <title>,"amazon_url": <amazon_url>,"author": <author_name>,"genre": <genre>}.
+		Click on the tab labelled header and enter a new header that looks like 'x-access-tokens' and the value of the header should be the random token generated while logging in.
+		Change the method to 'POST' and then press send.
+               
+                OUTPUT-                                      
+						{
+ 						 "message": "new favourite book added"
+						}
+
+
+	- To see details of all favourite books:   http://127.0.0.1:5000/favbooks
+		Click on the tab labelled header and enter a new header that looks like 'x-access-tokens' and the value of the header should be the random token generated while logging in.
+                Change method to 'GET' and the press send button to generate information of all favourite books.                                                                            
+		                           
+                OUTPUT-
+						{
+ 						 "your favorite books": [
+    							{
+      									"amazon_url": "https://www.amazon.in/Mysterious-Island-Wordsworth-Classics/dp/1840226242/ref=sr_1_1?dchild=1&keywords=mysterious+island&qid=1586598118&sr=8-1",
+      									"author": "Jules Verne",
+      									"genre": "Mystery",
+      									"id": 1,
+      									"title": "The Mysterious island"
+    							}
+  							]
+						}
+
+
+	- To delete a favourite book: http://127.0.0.1:5000/favbooks/<book_id>
+		Click on the tab labelled header and enter a new header that looks like 'x-access-tokens' and the value of the header should be the random token generated while logging in.
+                Change method to 'DELETE' and the press send button.
+                                                                            
+		OUTPUT-                                      
+						{
+ 						 "message": "Book deleted"
+						}
+
+
+	- To update a favourite book:   http://127.0.0.1:5000/favbooks/<book_id>
+		Click on the tab labelled header and enter a new header that looks like 'x-access-tokens' and the value of the header should be the random token generated while logging in.
+		Change method the 'PUT' and press the send button to update the book with book_id.
+		
+		OUTPUT- 
+						{
+ 						 "message": "Book updated"
+						} 
+
+*********************************************************************************************************************************************************************************************************************************************************************
